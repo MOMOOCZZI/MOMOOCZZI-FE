@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/onboard3"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    >
+    <Button
+        android:id="@+id/skip1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="FFF"
+        android:text="SKIP >>"
+        android:textColor="#808080"
+        android:textSize="15sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="사용자의 취향을 고려하여"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFD700"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="앱을 사용하며 좋아하셨던 음식을\n기반으로 추천해드려요"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:textColor="#808080"
+        android:textStyle="bold"
+        android:lineSpacingMultiplier="0.8"
+        android:letterSpacing="0.1"/>
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        android:src="@drawable/heart"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"/>
+    <ImageView
+        android:layout_width="86dp"
+        android:layout_height="21dp"
+        android:src="@drawable/onboarding3"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"/>
+    <Button
+        android:id="@+id/next3"
+        android:layout_width="287dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#FFD700"
+        android:text="다음"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginTop="50dp"/>
+
+
+</LinearLayout>
