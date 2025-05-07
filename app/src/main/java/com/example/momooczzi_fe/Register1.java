@@ -1,4 +1,4 @@
-package com.example.hello;
+package com.example.momooczzi_fe;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;

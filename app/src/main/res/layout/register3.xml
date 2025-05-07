@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/register2"
+    android:id="@+id/register3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -57,19 +57,19 @@
             android:textSize="12sp" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  2  "
+            android:textColor="#888888"
+            android:textSize="12sp" />
+
+        <TextView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/circle_selected"
             android:gravity="center"
-            android:text="  2  "
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="  3  "
-            android:textColor="#888888"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
     </LinearLayout>
     <!-- 제목 -->
@@ -78,14 +78,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginBottom="24dp"
-        android:text="기본 정보를 입력해주세요."
+        android:text="기본 소개를 입력해주세요."
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디"
+        android:text="별명"
         android:textStyle="bold"
         android:layout_gravity="left"
         android:layout_marginLeft="15dp"/>
@@ -96,17 +96,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <EditText
-            android:id="@+id/registerId"
+            android:id="@+id/registernick"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:hint="아이디를 입력해주세요"
+            android:hint="별명을 입력해주세요"
             android:textSize="12sp"/>
         <Button
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:background="@drawable/btn_round_border"
             android:backgroundTint="@null"
-            android:text="중복확인"
+            android:text="확인"
             android:textColor="#8B8B8B"
             android:textSize="12sp"
             android:layout_marginLeft="3dp"/>
@@ -116,7 +116,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호"
+        android:text="소개글"
         android:textStyle="bold"
         android:layout_gravity="left"
         android:layout_marginLeft="15dp"
@@ -124,30 +124,25 @@
         />
 
     <EditText
-        android:id="@+id/registerPass1"
+        android:id="@+id/introet"
         android:layout_width="305dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         android:layout_gravity="left"
-        android:layout_marginLeft="20dp"
-        android:layout_height="wrap_content"
-        android:hint="비밀번호를 입력해주세요"
-        android:textSize="12sp"/>
-
-    <EditText
-        android:id="@+id/registerPass2"
-        android:layout_width="305dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="20dp"
-        android:layout_height="wrap_content"
-        android:hint="비밀번호를 재입력해주세요"
+        android:gravity="top"
+        android:padding="10dp"
+        android:layout_height="170dp"
+        android:background="@drawable/round_border"
+        android:hint="자신을 소개하는 글을 입력해주세요"
         android:textSize="12sp"/>
     <!-- 다음 버튼 -->
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:backgroundTint="#D9D9D9"
+        android:layout_marginTop="140dp"
+        android:backgroundTint="#A3A3A3"
         android:enabled="false"
-        android:text="다음 단계"
+        android:text="회원가입"
         android:textColor="#FFFFFF" />
 </LinearLayout>
