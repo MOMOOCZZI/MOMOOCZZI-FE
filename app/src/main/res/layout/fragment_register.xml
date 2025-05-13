@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="245dp"
+    android:id="@+id/complete_register"
+    android:orientation="vertical"
+    android:background="@drawable/round_border">
+    <ImageView
+        android:layout_width="107dp"
+        android:layout_height="107dp"
+        android:src="@drawable/register_complete"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입을 축하합니다!"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:text="로그인 화면으로 돌아가기"
+        android:backgroundTint="#1E90FF"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"/>
+</LinearLayout>
