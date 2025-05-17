@@ -1,8 +1,10 @@
 package com.example.momooczzi_fe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -11,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
 public class Register3 extends AppCompatActivity {
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,18 @@ public class Register3 extends AppCompatActivity {
         };
         nicknameEditText.addTextChangedListener(textWatcher);
         introEditText.addTextChangedListener(textWatcher);
+        btnRegister.setOnClickListener(v -> {
+            FragmentRegister fragment = new FragmentRegister();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            // 프래그먼트 추가
+            transaction.replace(R.id.frag, fragment);
+            transaction.commit();
+
+            // 프래그먼트 레이아웃 보이게
+            findViewById(R.id.frag).setVisibility(View.VISIBLE);
+        });
 
     }
 }

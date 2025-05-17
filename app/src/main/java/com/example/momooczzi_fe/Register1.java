@@ -1,8 +1,10 @@
 package com.example.momooczzi_fe;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
@@ -18,7 +20,7 @@ import java.util.List;
 public class Register1 extends AppCompatActivity {
 
     private CheckBox cbAll, cb1, cb2, cb3, cb4, cb5, cb6, cb7;
-    private Button btnNext;
+    private Button btnNext, btnSkip;
 
     private List<CheckBox> requiredCheckboxes;
     private List<CheckBox> allCheckboxes;
@@ -68,6 +70,14 @@ public class Register1 extends AppCompatActivity {
 
         // 버튼 초기 상태 설정
         updateNextButtonState();
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Register2.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean areAllChecked(List<CheckBox> checkboxes) {
