@@ -8,10 +8,10 @@
     android:padding="20dp"
     >
     <Button
-        android:id="@+id/skip1"
+        android:id="@+id/skip3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFF"
+        android:background="@android:color/transparent"
         android:text="SKIP >>"
         android:textColor="#808080"
         android:textSize="15sp"
