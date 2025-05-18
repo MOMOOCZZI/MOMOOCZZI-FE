@@ -31,13 +31,13 @@
             android:layout_height="45dp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            android:src="@drawable/navigate_home" />
+            android:src="@drawable/navigate_clicked_home" />
 
         <ImageView
             android:id="@+id/nav_emoji"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/navigate_mypage" />
+            android:src="@drawable/navigate_clicked_mypage" />
     </LinearLayout>
 
 </LinearLayout>
