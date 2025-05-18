@@ -3,6 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#2E6FF2</color>
+    <color name="progressBlue">#00B6F1</color>
     <color name="gray">#D9D9D9</color>
+    <color name="yellow_bg">#FFDA48</color>
 
 </resources>
