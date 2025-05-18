@@ -12,6 +12,15 @@ import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
     private List<Integer> imageList;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public CardAdapter(List<Integer> imageList) {
         this.imageList = imageList;
@@ -22,7 +31,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_card, parent, false);
-        return new CardViewHolder(view);
+        return new CardViewHolder(view, listener);
     }
 
     @Override
@@ -38,9 +47,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public static class CardViewHolder extends RecyclerView.ViewHolder {
         ImageView cardImage;
 
-        public CardViewHolder(@NonNull View itemView) {
+        public CardViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             cardImage = itemView.findViewById(R.id.cardImage);
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(getAdapterPosition());
+                }
+            });
         }
     }
 }

@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.constraintlayout)
 
     implementation("com.tbuonomo:dotsindicator:4.3")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

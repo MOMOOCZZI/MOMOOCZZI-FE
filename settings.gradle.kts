@@ -16,8 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://devrepo.kakao.com/nexus/content/groups/public/") }
+        maven("https://jitpack.io")
+        maven { url = uri("https://naver.jfrog.io/artifactory/maven/") }
     }
 }
+
 
 rootProject.name = "MOMOOCZZI-FE"
 include(":app")
