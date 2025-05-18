@@ -1,5 +1,6 @@
 package com.example.momooczzi_fe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,11 +53,16 @@ public class Register2 extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {}
+
         };
 
         idEditText.addTextChangedListener(watcher);
         pass1EditText.addTextChangedListener(watcher);
         pass2EditText.addTextChangedListener(watcher);
 
+        nextButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), Register3.class);
+            startActivity(intent);
+        });
     }
 }
