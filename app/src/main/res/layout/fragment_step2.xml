@@ -1,6 +1,239 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <FrameLayout
+        android:id="@+id/backgroundBox2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_step2_box" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Step2"
+                    android:textColor="#00B6F1"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : 감정을 선택해주세요."
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <GridLayout
+                android:id="@+id/emotionGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:alignmentMode="alignMargins"
+                android:columnCount="3"
+                android:rowCount="3"
+                android:useDefaultMargins="true">
+
+                <!-- 이모지 버튼 8개 (예시 1개만 나머지는 복사해서 구성) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiHappy"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_happy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="즐거워요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiWorried"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_worried" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="걱정돼요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiSleepy"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_sleepy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="졸려요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiFull"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_full" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="배불러요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiConfused"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_confused" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="모르겠어요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiBlank"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_blank" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="무념무상이에요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiAngry"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_angry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="화가나요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/emojiSmile"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/emoji_smile" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="행복해요"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+
+            </GridLayout>
+        </LinearLayout>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
