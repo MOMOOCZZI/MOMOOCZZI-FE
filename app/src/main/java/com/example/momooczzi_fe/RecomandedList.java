@@ -52,32 +52,24 @@ public class RecomandedList extends AppCompatActivity {
         int[] imgIds = { R.id.menuImg1, R.id.menuImg2, R.id.menuImg3 };
         int[] nameIds = { R.id.menuName1, R.id.menuName2, R.id.menuName3 };
         int[] dataIds = { R.id.menuData1, R.id.menuData2, R.id.menuData3 };
-        int[] hashtagIds = { R.id.hashtag1, R.id.hashtag2, R.id.hashtag3 };
 
         for (int i = 0; i < 3; i++) {
             menuImages[i] = findViewById(imgIds[i]);
             menuNames[i] = findViewById(nameIds[i]);
             menuDatas[i] = findViewById(dataIds[i]);
-            hashtags[i] = findViewById(hashtagIds[i]);
         }
         int[] newImages = { R.drawable.donkatsu, R.drawable.ramen, R.drawable.pasta };
         String[] newNames = { "돈까스", "라멘", "파스타" };
         String[] newDescs = {
-                "기분이 울적할 땐 바삭한\n돈까스가 딱이지!",
+                "기분이 울적할 땐 바삭한\\n돈까스가 딱이지!",
                 "쌀쌀한 날씨엔 따끈한\\n국물이 최고!",
                 "기분 좋은 날엔 크리미한\\n파스타의 여유를!"
-        };
-        String[] newTags = {
-                "\\#기분전환 \\#바삭한한입\n\\#스트레스해소",
-                "\\#따끈한그릇 \\#국물충전\\n\\#오늘비오면라멘각",
-                "\\#여유로운한끼 \\#감성식사\\n\\#좋은날엔파스타"
         };
 
         for (int i = 0; i < 3; i++) {
             menuImages[i].setImageResource(newImages[i]);
             menuNames[i].setText(newNames[i]);
             menuDatas[i].setText(newDescs[i]);
-            hashtags[i].setText(newTags[i]);
         }
 
     }

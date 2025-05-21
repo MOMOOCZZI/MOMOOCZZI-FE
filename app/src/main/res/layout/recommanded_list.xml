@@ -50,7 +50,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_toRightOf="@+id/menuImg1"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/menuData1"
@@ -62,17 +62,6 @@
             android:textColor="#FFCC00"
             android:layout_toRightOf="@+id/menuImg1"
             android:layout_below="@+id/menuName1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/hashtag1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\#~~~ \#~~~\n\#~~~"
-            android:textSize="10sp"
-            android:textColor="#A3A3A3"
-            android:layout_toRightOf="@+id/menuImg1"
-            android:layout_below="@+id/menuData1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
     </RelativeLayout>
@@ -100,7 +89,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_toRightOf="@+id/menuImg2"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/menuData2"
@@ -112,17 +101,6 @@
             android:textColor="#FFCC00"
             android:layout_toRightOf="@+id/menuImg2"
             android:layout_below="@+id/menuName2"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/hashtag2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\#~~~ \#~~~\n\#~~~"
-            android:textSize="10sp"
-            android:textColor="#A3A3A3"
-            android:layout_toRightOf="@+id/menuImg2"
-            android:layout_below="@+id/menuData2"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
     </RelativeLayout>
@@ -150,7 +128,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_toRightOf="@+id/menuImg3"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/menuData3"
@@ -162,17 +140,6 @@
             android:textColor="#FFCC00"
             android:layout_toRightOf="@+id/menuImg3"
             android:layout_below="@+id/menuName3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/hashtag3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\#~~~ \#~~~\n\#~~~"
-            android:textSize="10sp"
-            android:textColor="#A3A3A3"
-            android:layout_toRightOf="@+id/menuImg3"
-            android:layout_below="@+id/menuData3"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
     </RelativeLayout>
