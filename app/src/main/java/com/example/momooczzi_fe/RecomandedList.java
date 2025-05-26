@@ -14,6 +14,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
+import com.example.momooczzi_fe.network.ApiClient;
+import com.example.momooczzi_fe.network.Food;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class RecomandedList extends AppCompatActivity {
 
     @Override
@@ -58,19 +69,30 @@ public class RecomandedList extends AppCompatActivity {
             menuNames[i] = findViewById(nameIds[i]);
             menuDatas[i] = findViewById(dataIds[i]);
         }
-        int[] newImages = { R.drawable.donkatsu, R.drawable.ramen, R.drawable.pasta };
-        String[] newNames = { "돈까스", "라멘", "파스타" };
-        String[] newDescs = {
-                "기분이 울적할 땐 바삭한\\n돈까스가 딱이지!",
-                "쌀쌀한 날씨엔 따끈한\\n국물이 최고!",
-                "기분 좋은 날엔 크리미한\\n파스타의 여유를!"
-        };
+        Retrofit retrofit = ApiClient.getClient();
+        Food foodService = retrofit.create(Food.class);
 
-        for (int i = 0; i < 3; i++) {
-            menuImages[i].setImageResource(newImages[i]);
-            menuNames[i].setText(newNames[i]);
-            menuDatas[i].setText(newDescs[i]);
-        }
+        foodService.getFoodList().enqueue(new Callback<List<FoodItem>>() {
+            @Override
+            public void onResponse(Call<List<FoodItem>> call, Response<List<FoodItem>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<FoodItem> foodList = response.body();
 
+                    for (int i = 0; i < Math.min(3, foodList.size()); i++) {
+                        FoodItem item = foodList.get(i);
+                        menuNames[i].setText(item.getFood());
+                        menuDatas[i].setText(item.getDescription().replace("\\n", "\n"));
+                        Glide.with(RecomandedList.this)
+                                .load(item.getImage_url())
+                                .into(menuImages[i]);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FoodItem>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

@@ -71,11 +71,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiHappy"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_happy" />
+                        android:src="@drawable/emoji_happy"
+                        android:scaleType="fitCenter"
+                        android:background="@null"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -92,11 +94,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiWorried"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_worried" />
+                        android:src="@drawable/emoji_worried"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,11 +117,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiSleepy"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_sleepy" />
+                        android:src="@drawable/emoji_sleepy"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -134,11 +140,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiFull"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_full" />
+                        android:src="@drawable/emoji_full"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -155,11 +163,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiConfused"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_confused" />
+                        android:src="@drawable/emoji_confused"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -176,11 +186,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiBlank"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_blank" />
+                        android:src="@drawable/emoji_blank"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -197,11 +209,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiAngry"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_angry" />
+                        android:src="@drawable/emoji_angry"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -218,11 +232,13 @@
                     android:layout_columnWeight="1"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/emojiSmile"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/emoji_smile" />
+                        android:src="@drawable/emoji_smile"
+                        android:scaleType="fitCenter"
+                        android:background="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
