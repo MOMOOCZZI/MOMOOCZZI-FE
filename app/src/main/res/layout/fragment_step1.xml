@@ -70,11 +70,13 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/maleIcon"
                         android:layout_width="150dp"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_male" />
+                        android:layout_height="180dp"
+                        android:src="@drawable/ic_male"
+                        android:scaleType="fitCenter"
+                        android:background="@null"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -89,10 +91,12 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/femaleIcon"
                         android:layout_width="150dp"
-                        android:layout_height="200dp"
+                        android:layout_height="180dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
                         android:src="@drawable/ic_female" />
 
                     <TextView
