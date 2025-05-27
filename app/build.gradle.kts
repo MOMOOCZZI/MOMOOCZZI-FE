@@ -1,3 +1,13 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+val apiBaseUrl = localProperties.getProperty("API_BASE_URL") ?: error("API_BASE_URL is not defined in local.properties")
+
  plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
@@ -15,6 +25,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
+
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -54,6 +71,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("me.relex:circleindicator:2.1.6")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
 
 }
 

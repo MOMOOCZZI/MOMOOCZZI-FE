@@ -67,10 +67,15 @@ public class Register2 extends AppCompatActivity {
         pass2EditText.addTextChangedListener(watcher);
 
         nextButton.setOnClickListener(v -> {
-            Log.d("Register2", "Next button clicked");
+            String userId = idEditText.getText().toString().trim();
+            String password = pass1EditText.getText().toString();
+
             Intent intent = new Intent(getApplicationContext(), Register3.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("password", password);
             startActivity(intent);
         });
+
 
     }
 }
