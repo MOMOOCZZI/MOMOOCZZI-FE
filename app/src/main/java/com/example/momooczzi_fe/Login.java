@@ -56,7 +56,6 @@ public class Login extends AppCompatActivity {
                             JSONObject json = new JSONObject(responseBody);
                             String token = json.getString("access_token");
 
-                            // ✅ access_token을 SharedPreferences에 저장
                             getSharedPreferences("auth", MODE_PRIVATE)
                                     .edit()
                                     .putString("access_token", token)
