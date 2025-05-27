@@ -2,6 +2,7 @@ package com.example.momooczzi_fe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,19 +13,26 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 
 public class Login extends AppCompatActivity {
     ImageButton naverBtn, googleBtn, kakaoBtn;
+    Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login); // xml 이름에 맞게 수정
+        setContentView(R.layout.login);
 
         naverBtn = findViewById(R.id.naverlogin);
         googleBtn = findViewById(R.id.googlelogin);
         kakaoBtn = findViewById(R.id.kakaologin);
+        registerBtn = findViewById(R.id.registerbtn);
 
         naverBtn.setOnClickListener(v -> startNaverLogin());
         googleBtn.setOnClickListener(v -> startGoogleLogin());
         kakaoBtn.setOnClickListener(v -> startKakaoLogin());
+
+        registerBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this, Register1.class);
+            startActivity(intent);
+        });
     }
     private void startNaverLogin() {
         // 네이버 로그인 SDK 초기화 및 로그인 시작 코드 작성
