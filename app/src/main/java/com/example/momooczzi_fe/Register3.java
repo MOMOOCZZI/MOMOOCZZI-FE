@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 public class Register3 extends AppCompatActivity {
-    private Button btnRegister;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +30,10 @@ public class Register3 extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton backButton = findViewById(R.id.backbtn);
+        backButton.setOnClickListener(v -> finish());
+
         EditText nicknameEditText = findViewById(R.id.registernick);
         EditText introEditText = findViewById(R.id.introet);
         Button registerButton = findViewById(R.id.btnRegister);
@@ -41,13 +44,12 @@ public class Register3 extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // 입력값 체크
                 String nickname = nicknameEditText.getText().toString().trim();
                 String intro = introEditText.getText().toString().trim();
 
                 if (!nickname.isEmpty() && !intro.isEmpty()) {
                     registerButton.setEnabled(true);
-                    registerButton.setBackgroundTintList(getResources().getColorStateList(R.color.blue, null));
+                    registerButton.setBackgroundTintList(getResources().getColorStateList(R.color.register_grey, null));
                 } else {
                     registerButton.setEnabled(false);
                     registerButton.setBackgroundTintList(getResources().getColorStateList(R.color.gray, null));
@@ -57,20 +59,17 @@ public class Register3 extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         };
+
         nicknameEditText.addTextChangedListener(textWatcher);
         introEditText.addTextChangedListener(textWatcher);
-        btnRegister.setOnClickListener(v -> {
-            FragmentRegister fragment = new FragmentRegister();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            // 프래그먼트 추가
-            transaction.replace(R.id.frag, fragment);
-            transaction.commit();
-
-            // 프래그먼트 레이아웃 보이게
-            findViewById(R.id.frag).setVisibility(View.VISIBLE);
+        // ✅ 버튼 클릭 시 MainActivity로 이동
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Register3.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
-
     }
+
+
 }
