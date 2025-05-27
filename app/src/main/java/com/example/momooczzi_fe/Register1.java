@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,9 @@ public class Register1 extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton backButton = findViewById(R.id.backbtn);
+        backButton.setOnClickListener(v -> finish());
 
         // 체크박스 연결
         cbAll = findViewById(R.id.cbAll);
@@ -98,6 +102,6 @@ public class Register1 extends AppCompatActivity {
         boolean enabled = areRequiredChecked();
         btnNext.setEnabled(enabled);
         btnNext.setBackgroundTintList(ColorStateList.valueOf(
-                Color.parseColor(enabled ? "#1E90FF" : "#D9D9D9")));
+                Color.parseColor(enabled ? "#A3A3A3" : "#D9D9D9")));
     }
 }

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,10 @@ public class Register2 extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton backButton = findViewById(R.id.backbtn);
+        backButton.setOnClickListener(v -> finish());
+
         EditText idEditText = findViewById(R.id.registerId);
         EditText pass1EditText = findViewById(R.id.registerPass1);
         EditText pass2EditText = findViewById(R.id.registerPass2);
@@ -44,7 +50,7 @@ public class Register2 extends AppCompatActivity {
 
                 if (!id.isEmpty() && pass1.equals(pass2) && !pass1.isEmpty()) {
                     nextButton.setEnabled(true);
-                    nextButton.setBackgroundTintList(getResources().getColorStateList(R.color.blue, null));
+                    nextButton.setBackgroundTintList(getResources().getColorStateList(R.color.register_grey, null));
                 } else {
                     nextButton.setEnabled(false);
                     nextButton.setBackgroundTintList(getResources().getColorStateList(R.color.gray, null));
@@ -61,8 +67,10 @@ public class Register2 extends AppCompatActivity {
         pass2EditText.addTextChangedListener(watcher);
 
         nextButton.setOnClickListener(v -> {
+            Log.d("Register2", "Next button clicked");
             Intent intent = new Intent(getApplicationContext(), Register3.class);
             startActivity(intent);
         });
+
     }
 }
