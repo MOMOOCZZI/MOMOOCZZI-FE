@@ -1,12 +1,16 @@
 package com.example.momooczzi_fe;
 
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 public class SharedViewModel extends ViewModel {
     private boolean gender;
     private String emotion;
-    private String weather;
     private String heapen;
+    private final MutableLiveData<Double> latitude = new MutableLiveData<>();
+    private final MutableLiveData<Double> longitude = new MutableLiveData<>();
+
 
 
     public boolean getGender() {
@@ -25,17 +29,24 @@ public class SharedViewModel extends ViewModel {
         this.emotion = emotion;
     }
 
-    public String getWeather() {
-        return weather;
-    }
-
-    public void setWeather(String weather) {
-        this.weather = weather;
-    }
     public String getHeapen(){
         return heapen;
     }
     public void setHeapen(String heapen){
         this.heapen = heapen;
+    }
+
+    public void setLocation(double lat, double lng) {
+        latitude.setValue(lat);
+        longitude.setValue(lng);
+    }
+
+    public LiveData<Double> getLatitude() {
+        return latitude;
+    }
+
+    public LiveData<Double> getLongitude() {
+
+        return longitude;
     }
 }
