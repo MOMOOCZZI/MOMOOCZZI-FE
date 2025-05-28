@@ -47,7 +47,7 @@ public class LocationFoundFragment extends Fragment {
 
         webView.clearCache(true);
 
-        LocationViewModel viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
+        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
 
         webView.setWebViewClient(new WebViewClient() {
