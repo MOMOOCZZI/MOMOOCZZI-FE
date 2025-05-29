@@ -32,6 +32,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 
     buildTypes {
@@ -58,6 +59,7 @@ dependencies {
 
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
