@@ -16,12 +16,15 @@ public class SharedViewModel extends ViewModel {
     public boolean getGender() {
         return gender;
     }
+
     public void setGender(boolean gender) {
         this.gender = gender;
     }
+
     public String getEmotion() {
         return emotion;
     }
+
     public void setEmotion(String emotion) {
         this.emotion = emotion;
     }

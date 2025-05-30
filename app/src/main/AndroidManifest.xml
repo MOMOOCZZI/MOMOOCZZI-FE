@@ -40,6 +40,10 @@
         </activity>
 
         <activity android:name=".MenuRecommandActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCtaPdLwKlF4vVjl25dEOeZJ4ziFMbn6Xs" />
+
     </application>
 
 </manifest>
