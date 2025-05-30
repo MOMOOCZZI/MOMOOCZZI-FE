@@ -2,26 +2,29 @@ package com.example.momooczzi_fe;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class LocationFoundFragment extends Fragment {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-    private WebView webView;
+public class LocationFoundFragment extends Fragment implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+    private SharedViewModel viewModel;
+
+    public LocationFoundFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,50 +34,47 @@ public class LocationFoundFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        webView = view.findViewById(R.id.kakaoMapWebView);
-
-        if (webView == null) {
-            Log.e("WebView", "kakaoMapWebView not found in layout");
-            return;
+        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        SupportMapFragment mapFragment = (SupportMapFragment)
+                getChildFragmentManager().findFragmentById(R.id.googleMap);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
         }
-
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setAllowFileAccess(true);
-        settings.setAllowContentAccess(true);
-        settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-
-        webView.clearCache(true);
-
-        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                LocationViewModel viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
-
-                viewModel.getLatitude().observe(getViewLifecycleOwner(), lat -> {
-                    viewModel.getLongitude().observe(getViewLifecycleOwner(), lng -> {
-                        SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-
-                        sharedViewModel.setLocation(lat, lng);
-
-                        String js = "showMap(" + lat + "," + lng + ")";
-                        view.evaluateJavascript(js, null);
-                    });
-                });
-            }
-        });
-
-
-        webView.loadUrl("file:///android_asset/kakaomap.html");
-
         view.findViewById(R.id.btn_next_recommand).setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), RecomandedList.class);
             startActivity(intent);
         });
     }
 
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // 초기값 체크
+        Double lat = viewModel.getLatitude().getValue();
+        Double lng = viewModel.getLongitude().getValue();
+        if (lat != null && lng != null) {
+            showMarkerOnMap(lat, lng);
+        }
+
+        // LiveData observe
+        viewModel.getLatitude().observe(getViewLifecycleOwner(), l -> updateMapIfReady());
+        viewModel.getLongitude().observe(getViewLifecycleOwner(), l -> updateMapIfReady());
+    }
+
+    private void updateMapIfReady() {
+        if (mMap == null) return;
+        Double lat = viewModel.getLatitude().getValue();
+        Double lng = viewModel.getLongitude().getValue();
+        if (lat != null && lng != null) {
+            showMarkerOnMap(lat, lng);
+        }
+    }
+
+    private void showMarkerOnMap(double lat, double lng) {
+        LatLng userLocation = new LatLng(lat, lng);
+        mMap.clear(); // 기존 마커 제거 (중복 방지)
+        mMap.addMarker(new MarkerOptions().position(userLocation).title("현재 위치"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
+    }
 }
