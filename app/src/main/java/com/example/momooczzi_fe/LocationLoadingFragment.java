@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.os.Looper;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import android.location.Location;
 
 import android.Manifest;
 
@@ -21,6 +26,7 @@ import androidx.viewpager2.widget.ViewPager2;
 public class LocationLoadingFragment extends Fragment {
 
     private FusedLocationProviderClient fusedLocationClient;
+    private LocationCallback locationCallback;
 
     public LocationLoadingFragment() {}
 
@@ -41,34 +47,42 @@ public class LocationLoadingFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
-            try {
-                fusedLocationClient.getLastLocation()
-                        .addOnSuccessListener(location -> {
-                            ViewPager2 viewPager = requireActivity().findViewById(R.id.viewPager);
-                            if (location != null) {
-                                LocationViewModel viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
-                                viewModel.setLocation(location.getLatitude(), location.getLongitude());
-                                viewPager.setCurrentItem(5, true); // LocationFoundFragment
-                            } else {
-                                viewPager.setCurrentItem(6, true); // LocationFailedFragment
-                            }
-                        })
-                        .addOnFailureListener(e -> {
-                            ViewPager2 viewPager = requireActivity().findViewById(R.id.viewPager);
-                            viewPager.setCurrentItem(6, true); // LocationFailedFragment
-                        });
-            } catch (SecurityException e) {
-                e.printStackTrace();
-                ViewPager2 viewPager = requireActivity().findViewById(R.id.viewPager);
-                viewPager.setCurrentItem(6, true); // LocationFailedFragment
-            }
+            LocationRequest locationRequest = LocationRequest.create()
+                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                    .setInterval(1000) // 1초마다 위치 요청
+
+                    // .setNumUpdates(1)도 가능하지만 deprecated 상황이 있어서 사용 X
+                    ;
+
+            locationCallback = new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    if (locationResult == null) return;
+
+                    Location location = locationResult.getLastLocation();
+                    if (location != null) {
+                        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+                        viewModel.setLocation(location.getLatitude(), location.getLongitude());
+
+                        ViewPager2 viewPager = requireActivity().findViewById(R.id.viewPager);
+                        viewPager.setCurrentItem(5, true); // 성공
+
+                        // ✅ 더 이상 위치 업데이트 필요 없으면 중지
+                        fusedLocationClient.removeLocationUpdates(locationCallback);
+                    } else {
+                        ViewPager2 viewPager = requireActivity().findViewById(R.id.viewPager);
+                        viewPager.setCurrentItem(6, true); // 실패
+                    }
+                }
+            };
+
+            // 위치 요청 시작
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 
         } else {
-            // 이 경우는 이 함수 자체를 호출하면 안 되는 상황이지만 방어 로직 추가
             Toast.makeText(requireContext(), "위치 권한이 필요합니다", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
 

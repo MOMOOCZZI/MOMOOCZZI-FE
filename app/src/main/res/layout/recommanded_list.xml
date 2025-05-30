@@ -64,6 +64,15 @@
             android:layout_below="@+id/menuName1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="지도에서 확인하기"
+            android:layout_toRightOf="@+id/menuImg1"
+            android:layout_below="@+id/menuData1"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/register_grey_button"
+            android:backgroundTint="@null"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/menu2"
@@ -103,6 +112,15 @@
             android:layout_below="@+id/menuName2"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="지도에서 확인하기"
+            android:layout_toRightOf="@+id/menuImg2"
+            android:layout_below="@+id/menuData2"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/register_grey_button"
+            android:backgroundTint="@null"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/menu3"
@@ -142,6 +160,15 @@
             android:layout_below="@+id/menuName3"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="지도에서 확인하기"
+            android:layout_toRightOf="@+id/menuImg3"
+            android:layout_below="@+id/menuData3"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/register_grey_button"
+            android:backgroundTint="@null"/>
     </RelativeLayout>
 
     <Button
