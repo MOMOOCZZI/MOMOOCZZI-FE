@@ -1,5 +1,6 @@
 package com.example.momooczzi_fe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,23 +50,28 @@ public class LocationFoundFragment extends Fragment {
 
         LocationViewModel viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
 
-
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                Log.d("WebView", "HTML 로딩 완료");
                 viewModel.getLatitude().observe(getViewLifecycleOwner(), lat -> {
                     viewModel.getLongitude().observe(getViewLifecycleOwner(), lng -> {
+                        SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+                        sharedViewModel.setLatitude(lat);
+                        sharedViewModel.setLongitude(lng);
+
                         String js = "showMap(" + lat + "," + lng + ")";
-                        Log.d("WebView", "지도 표시 JS 실행: " + js);
-                        webView.evaluateJavascript(js, null);
+                        view.evaluateJavascript(js, null);
                     });
                 });
             }
         });
 
-
         webView.loadUrl("file:///android_asset/kakaomap.html");
+
+        view.findViewById(R.id.btn_next_recommand).setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), RecomandedList.class);
+            startActivity(intent);
+        });
     }
 
 }
