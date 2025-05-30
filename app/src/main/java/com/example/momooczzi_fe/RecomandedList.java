@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +48,7 @@ public class RecomandedList extends AppCompatActivity {
         SharedViewModel vm = new ViewModelProvider(this).get(SharedViewModel.class);
 
         TextView textView = findViewById(R.id.textV);
-        textView.setText("지금 님께 추천드리는 음식은?");
+        textView.setText("지금 당신에게 추천드리는 음식은?");
 
         ImageView[] menuImages = new ImageView[3];
         TextView[] menuNames = new TextView[3];
@@ -63,12 +64,23 @@ public class RecomandedList extends AppCompatActivity {
             menuDatas[i] = findViewById(dataIds[i]);
         }
 
+        Double latObj = vm.getLatitude().getValue();
+        Double lngObj = vm.getLongitude().getValue();
+
+        double latitude = (latObj != null) ? latObj : 0.0;
+        double longitude = (lngObj != null) ? lngObj : 0.0;
+
+        Log.e("RECOMMAND_DEBUG", "요청 파라미터: gender=" + vm.getGender() +
+                ", emotion=" + vm.getEmotion() +
+                ", happen=" + vm.getHappen() +
+                ", lat=" + latitude + ", lng=" + longitude);
+
         ApiFoodService.postFoodRecommendation(
                 vm.getGender(),
                 vm.getEmotion(),
                 vm.getHappen(),
-                vm.getLatitude(),
-                vm.getLongitude(),
+                latitude,
+                longitude,
                 new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {

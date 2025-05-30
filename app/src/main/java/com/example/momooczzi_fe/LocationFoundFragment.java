@@ -53,11 +53,13 @@ public class LocationFoundFragment extends Fragment {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
+                LocationViewModel viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
+
                 viewModel.getLatitude().observe(getViewLifecycleOwner(), lat -> {
                     viewModel.getLongitude().observe(getViewLifecycleOwner(), lng -> {
                         SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-                        sharedViewModel.setLatitude(lat);
-                        sharedViewModel.setLongitude(lng);
+
+                        sharedViewModel.setLocation(lat, lng);
 
                         String js = "showMap(" + lat + "," + lng + ")";
                         view.evaluateJavascript(js, null);
@@ -65,6 +67,7 @@ public class LocationFoundFragment extends Fragment {
                 });
             }
         });
+
 
         webView.loadUrl("file:///android_asset/kakaomap.html");
 

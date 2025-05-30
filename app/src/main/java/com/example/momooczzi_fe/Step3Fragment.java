@@ -23,7 +23,6 @@ public class Step3Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_step3, container, false);
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-
         txtheapen = view.findViewById(R.id.editMessage);
         msg = txtheapen.getText().toString();
         sharedViewModel.setHappen(msg);
