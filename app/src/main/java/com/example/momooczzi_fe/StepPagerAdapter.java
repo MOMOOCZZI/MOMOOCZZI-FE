@@ -22,13 +22,12 @@ public class StepPagerAdapter extends FragmentStateAdapter {
             case 4: return new LocationLoadingFragment();
             case 5: return new LocationFoundFragment();
             case 6: return new LocationFailedFragment();
-            case 7: return new Step5Fragment();
             default: return new Step1Fragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 7;
     }
 }

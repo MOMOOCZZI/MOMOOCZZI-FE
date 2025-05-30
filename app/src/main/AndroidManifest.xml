@@ -27,6 +27,8 @@
 
         <activity android:name=".MainActivity" />
 
+        <activity android:name=".RecomandedList" />
+
         <activity
             android:name=".OnboardingActivity"
             android:exported="true">

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 public class SharedViewModel extends ViewModel {
     private boolean gender;
     private String emotion;
-    private String heapen;
+    private String happen;
     private final MutableLiveData<Double> latitude = new MutableLiveData<>();
     private final MutableLiveData<Double> longitude = new MutableLiveData<>();
 
@@ -29,11 +29,11 @@ public class SharedViewModel extends ViewModel {
         this.emotion = emotion;
     }
 
-    public String getHeapen(){
-        return heapen;
+    public String getHappen(){
+        return happen;
     }
-    public void setHeapen(String heapen){
-        this.heapen = heapen;
+    public void setHappen(String happen){
+        this.happen = happen;
     }
 
     public void setLocation(double lat, double lng) {
@@ -46,7 +46,6 @@ public class SharedViewModel extends ViewModel {
     }
 
     public LiveData<Double> getLongitude() {
-
         return longitude;
     }
 }

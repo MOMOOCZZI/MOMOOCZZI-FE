@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,17 +14,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.momooczzi_fe.network.ApiClient;
-import com.example.momooczzi_fe.network.Food;
+import com.example.momooczzi_fe.network.ApiFoodService;
+import com.example.momooczzi_fe.network.FoodItem;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class RecomandedList extends AppCompatActivity {
 
@@ -38,27 +44,15 @@ public class RecomandedList extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedViewModel vm = new ViewModelProvider(this).get(SharedViewModel.class);
+
         TextView textView = findViewById(R.id.textV);
+        textView.setText("지금 당신에게 추천드리는 음식은?");
 
-        String name = "won_ee";
-        String fullText = "지금 " + name + " 님께 추천드리는 음식은?";
-        SpannableString spannable = new SpannableString(fullText);
-
-        int start = 0;
-        int end = name.length();
-
-        spannable.setSpan(
-                new ForegroundColorSpan(Color.parseColor("#00B6F1")),
-                start,
-                end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
-
-        textView.setText(spannable);
         ImageView[] menuImages = new ImageView[3];
         TextView[] menuNames = new TextView[3];
         TextView[] menuDatas = new TextView[3];
-        TextView[] hashtags = new TextView[3];
 
         int[] imgIds = { R.id.menuImg1, R.id.menuImg2, R.id.menuImg3 };
         int[] nameIds = { R.id.menuName1, R.id.menuName2, R.id.menuName3 };
@@ -69,30 +63,66 @@ public class RecomandedList extends AppCompatActivity {
             menuNames[i] = findViewById(nameIds[i]);
             menuDatas[i] = findViewById(dataIds[i]);
         }
-        Retrofit retrofit = ApiClient.getClient();
-        Food foodService = retrofit.create(Food.class);
 
-        foodService.getFoodList().enqueue(new Callback<List<FoodItem>>() {
-            @Override
-            public void onResponse(Call<List<FoodItem>> call, Response<List<FoodItem>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<FoodItem> foodList = response.body();
+        Double latObj = vm.getLatitude().getValue();
+        Double lngObj = vm.getLongitude().getValue();
 
-                    for (int i = 0; i < Math.min(3, foodList.size()); i++) {
-                        FoodItem item = foodList.get(i);
-                        menuNames[i].setText(item.getFood());
-                        menuDatas[i].setText(item.getDescription().replace("\\n", "\n"));
-                        Glide.with(RecomandedList.this)
-                                .load(item.getImage_url())
-                                .into(menuImages[i]);
+        double latitude = (latObj != null) ? latObj : 0.0;
+        double longitude = (lngObj != null) ? lngObj : 0.0;
+
+        Log.e("RECOMMAND_DEBUG", "요청 파라미터: gender=" + vm.getGender() +
+                ", emotion=" + vm.getEmotion() +
+                ", happen=" + vm.getHappen() +
+                ", lat=" + latitude + ", lng=" + longitude);
+
+        ApiFoodService.postFoodRecommendation(
+                vm.getGender(),
+                vm.getEmotion(),
+                vm.getHappen(),
+                latitude,
+                longitude,
+                new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String json = response.body().string();
+                            try {
+                                JSONObject root = new JSONObject(json);
+                                JSONArray foodArray = root.getJSONArray("food");
+                                List<FoodItem> foodList = new ArrayList<>();
+
+                                for (int i = 0; i < foodArray.length(); i++) {
+                                    JSONObject item = foodArray.getJSONObject(i);
+                                    FoodItem foodItem = new FoodItem(
+                                            item.getString("food"),
+                                            item.getString("description"),
+                                            item.getString("image_url")
+                                    );
+                                    foodList.add(foodItem);
+                                }
+
+                                runOnUiThread(() -> {
+                                    for (int i = 0; i < Math.min(3, foodList.size()); i++) {
+                                        FoodItem item = foodList.get(i);
+                                        menuNames[i].setText(item.getFood());
+                                        menuDatas[i].setText(item.getDescription().replace("\\n", "\n"));
+                                        Glide.with(RecomandedList.this)
+                                                .load(item.getImage_url())
+                                                .into(menuImages[i]);
+                                    }
+                                });
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<FoodItem>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        );
     }
 }
