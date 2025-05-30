@@ -37,6 +37,14 @@
             android:layout_marginTop="16dp"
             />
 
+        <Button
+            android:id="@+id/btn_next_recommand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다음"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
+
     </LinearLayout>
 
 </FrameLayout>
