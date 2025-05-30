@@ -26,7 +26,7 @@ public class Step3Fragment extends Fragment {
 
         txtheapen = view.findViewById(R.id.editMessage);
         msg = txtheapen.getText().toString();
-        sharedViewModel.setHeapen(msg);
+        sharedViewModel.setHappen(msg);
 
         return view;
     }
