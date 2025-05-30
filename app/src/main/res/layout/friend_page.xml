@@ -103,6 +103,7 @@
                 android:layout_marginEnd="8dp"/>
 
             <TextView
+                android:id="@+id/my_nickname"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
