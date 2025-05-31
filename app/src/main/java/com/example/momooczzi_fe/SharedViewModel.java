@@ -5,35 +5,37 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 public class SharedViewModel extends ViewModel {
-    private boolean gender;
-    private String emotion;
-    private String happen;
+    private final MutableLiveData<Boolean> gender = new MutableLiveData<>();
+    private final MutableLiveData<String> emotion = new MutableLiveData<>();
+    private final MutableLiveData<String> happen = new MutableLiveData<>();
+
     private final MutableLiveData<Double> latitude = new MutableLiveData<>();
     private final MutableLiveData<Double> longitude = new MutableLiveData<>();
 
 
 
-    public boolean getGender() {
+    public LiveData<Boolean> getGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
+    public void setGender(boolean genderValue) {
+        gender.setValue(genderValue);
     }
 
-    public String getEmotion() {
+    public LiveData<String> getEmotion() {
         return emotion;
     }
 
-    public void setEmotion(String emotion) {
-        this.emotion = emotion;
+    public void setEmotion(String emotionValue) {
+        emotion.setValue(emotionValue);
     }
 
-    public String getHappen(){
+    public LiveData<String> getHappen() {
         return happen;
     }
-    public void setHappen(String happen){
-        this.happen = happen;
+
+    public void setHappen(String happenValue) {
+        happen.setValue(happenValue);
     }
 
     public void setLocation(double lat, double lng) {

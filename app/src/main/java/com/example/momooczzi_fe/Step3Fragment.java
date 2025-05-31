@@ -1,9 +1,11 @@
 package com.example.momooczzi_fe;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ public class Step3Fragment extends Fragment {
     private SharedViewModel sharedViewModel;
     private EditText txtheapen;
     private String msg;
+    private Button save;
 
     public Step3Fragment() {}
 
@@ -24,9 +27,12 @@ public class Step3Fragment extends Fragment {
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         txtheapen = view.findViewById(R.id.editMessage);
-        msg = txtheapen.getText().toString();
-        sharedViewModel.setHappen(msg);
-
+        save = view.findViewById(R.id.save);
+        save.setOnClickListener(v->{
+            msg = txtheapen.getText().toString();
+            sharedViewModel.setHappen(msg);
+            Log.e("RECOMMAND_DEBUG",  "메세지" + sharedViewModel.getHappen().getValue());
+        });
         return view;
     }
 }

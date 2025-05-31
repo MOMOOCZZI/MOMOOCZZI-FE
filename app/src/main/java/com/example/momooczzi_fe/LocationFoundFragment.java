@@ -42,6 +42,11 @@ public class LocationFoundFragment extends Fragment implements OnMapReadyCallbac
         }
         view.findViewById(R.id.btn_next_recommand).setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), RecomandedList.class);
+            intent.putExtra("gender", viewModel.getGender().getValue());
+            intent.putExtra("emotion", viewModel.getEmotion().getValue());
+            intent.putExtra("happen", viewModel.getHappen().getValue());
+            intent.putExtra("lat", viewModel.getLatitude().getValue());
+            intent.putExtra("lng", viewModel.getLongitude().getValue());
             startActivity(intent);
         });
     }

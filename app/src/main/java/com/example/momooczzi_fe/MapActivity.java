@@ -1,5 +1,6 @@
 package com.example.momooczzi_fe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -34,6 +35,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private ActivityMapBinding binding;
     private RecyclerView recyclerView;
     private PlaceAdapter adapter;
+    private String key;
+    private double lat, lng;
 
 
     @Override
@@ -60,19 +63,23 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // 서울 시청 예시 위치
-        LatLng center = new LatLng(37.5665, 126.9780);
+        Intent intent = getIntent();
+
+        lat = intent.getDoubleExtra("latitude", 37.5665);
+        lng = intent.getDoubleExtra("longitude", 126.9780);
+
+        LatLng center = new LatLng(lat, lng);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 15));
 
-        String keyword = getIntent().getStringExtra("food_keyword");
-        if (keyword != null) {
-            fetchNearbyPlaces(center, keyword);
+        key = intent.getStringExtra("key");
+        if (key != null) {
+            fetchNearbyPlaces(center, key);
         }
 
     }
     private void fetchNearbyPlaces(LatLng location, String keyword) {
         String locStr = location.latitude + "," + location.longitude;
-        int radius = 1000; // 1km
+        int radius = 2000; // 2km
         String apiKey = "AIzaSyCtaPdLwKlF4vVjl25dEOeZJ4ziFMbn6Xs"; // 실제 API Key
 
         PlacesAPI.apiService.getNearbyPlaces(

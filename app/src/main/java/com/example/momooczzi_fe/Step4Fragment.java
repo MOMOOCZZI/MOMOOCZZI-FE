@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,8 @@ public class Step4Fragment extends Fragment {
                         // ViewModel에 위치 저장
                         SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
                         viewModel.setLocation(lat, lng);
+
+                        Log.e("RECOMMAND_DEBUG",  "위치" + viewModel.getLatitude().getValue() + viewModel.getLongitude().getValue());
                     }
 
                     // 다음 프래그먼트(Step5)로 이동
