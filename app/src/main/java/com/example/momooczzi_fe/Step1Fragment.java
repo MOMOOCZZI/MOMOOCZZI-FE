@@ -1,6 +1,7 @@
 package com.example.momooczzi_fe;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class Step1Fragment extends Fragment {
             male.setBackgroundResource(R.drawable.bg_selected); // 선택 테두리
             female.setBackgroundResource(0); // 다른 쪽은 해제
             sharedViewModel.setGender(true);
+            Log.e("RECOMMAND_DEBUG",  "성별" + sharedViewModel.getGender().getValue());
         });
 
         // 여성 클릭
@@ -41,6 +43,7 @@ public class Step1Fragment extends Fragment {
             female.setBackgroundResource(R.drawable.bg_selected);
             male.setBackgroundResource(0);
             sharedViewModel.setGender(false);
+            Log.e("RECOMMAND_DEBUG",  "성별" + sharedViewModel.getGender().getValue());
         });
         return view;
     }

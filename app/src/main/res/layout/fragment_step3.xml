@@ -51,16 +51,24 @@
             <EditText
                 android:id="@+id/editMessage"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="140dp"
                 android:background="@drawable/edittext_bg"
                 android:hint="모묵찌에게 알려줘~"
                 android:padding="16dp"
                 android:textSize="16sp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="10dp"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:maxLines="6"
                 android:overScrollMode="always" />
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장하기"
+                android:layout_gravity="center"
+                android:background="@drawable/register_grey_button"
+                android:layout_marginTop="5dp"/>
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

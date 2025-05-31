@@ -1,6 +1,7 @@
 package com.example.momooczzi_fe;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,10 @@ public class Step2Fragment extends Fragment {
             button.setOnClickListener(v -> {
                 clearSelection();
                 v.setBackgroundResource(R.drawable.bg_selected); // 테두리 drawable 지정
-                String emotion = getEmotionById(v.getId());
+                String emotion = getEmotionById(button.getId());
                 sharedViewModel.setEmotion(emotion);
+                Log.e("RECOMMAND_DEBUG",  "감정" + sharedViewModel.getEmotion().getValue()+
+                        ", 성별" + sharedViewModel.getGender().getValue());
             });
         }
 

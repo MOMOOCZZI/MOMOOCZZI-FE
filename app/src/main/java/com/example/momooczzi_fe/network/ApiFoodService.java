@@ -19,6 +19,7 @@ public class ApiFoodService {
     public static void postFoodRecommendation(Boolean gender, String emotion, String happen,
                                               double lat, double lon, Callback callback) {
         try {
+            Log.e("FoodAPI", "JSON 생성 시작");
             JSONObject json = new JSONObject();
             json.put("gender", gender);
             json.put("emotion", emotion);
@@ -37,6 +38,7 @@ public class ApiFoodService {
                     .build();
 
             client.newCall(request).enqueue(callback);
+            Log.e("FoodAPI", "JSON 생성 성공");
         } catch (Exception e) {
             Log.e("FoodAPI", "JSON 생성 실패", e);
         }
