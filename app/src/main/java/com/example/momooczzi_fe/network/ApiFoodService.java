@@ -1,10 +1,14 @@
 package com.example.momooczzi_fe.network;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.momooczzi_fe.BuildConfig;
+import android.content.SharedPreferences;
 
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -16,7 +20,7 @@ public class ApiFoodService {
     private static final OkHttpClient client = new OkHttpClient();
     private static final String BASE_URL = BuildConfig.API_BASE_URL;
 
-    public static void postFoodRecommendation(Boolean gender, String emotion, String happen,
+    public static void postFoodRecommendation(Context context, Boolean gender, String emotion, String happen,
                                               double lat, double lon, Callback callback) {
         try {
             Log.e("FoodAPI", "JSON 생성 시작");
@@ -32,8 +36,19 @@ public class ApiFoodService {
                     MediaType.get("application/json; charset=utf-8")
             );
 
+            SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+            String token = prefs.getString("access_token", null);
+
+            if (token == null) {
+                Log.e("ApiFoodService", "❌ access_token 없음");
+                // 적절한 실패 콜백 처리
+                callback.onFailure(null, new IOException("access_token 없음"));
+                return;
+            }
+
             Request request = new Request.Builder()
                     .url(BASE_URL + "food")
+                    .addHeader("Authorization", "Bearer " + token)
                     .post(body)
                     .build();
 
