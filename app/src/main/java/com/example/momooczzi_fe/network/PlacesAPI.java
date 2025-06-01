@@ -11,7 +11,7 @@ public interface PlacesAPI {
     Call<PlacesResponse> getNearbyPlaces(
             @Query("location") String location,
             @Query("radius") int radius,
-            @Query("keyword") String keyword,
+            @Query(value = "keyword", encoded = true) String keyword,
             @Query("type") String type,
             @Query("key") String apiKey
     );
