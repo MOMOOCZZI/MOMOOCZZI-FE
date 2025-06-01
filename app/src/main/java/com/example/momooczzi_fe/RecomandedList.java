@@ -85,6 +85,7 @@ public class RecomandedList extends AppCompatActivity {
                 ", lat=" + lat + ", lng=" + lng);
 
         ApiFoodService.postFoodRecommendation(
+                this,
                 gender,
                 emotion,
                 happen,
@@ -93,19 +94,20 @@ public class RecomandedList extends AppCompatActivity {
                 new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
+                        Log.e("RECOMMAND_DEBUG", "서버 요청 실패", e);
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        Log.e("RECOMMAND_DEBUG", "서버 요청시작");
-                        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                        Log.e("RECOMMAND_DEBUG", "서버 응답 수신됨");
+
                         if (response.isSuccessful()) {
                             String json = response.body().string();
                             Log.e("RECOMMAND_DEBUG", "서버 응답 JSON: " + json);
+
                             try {
                                 JSONObject root = new JSONObject(json);
-                                JSONArray foodArray = root.getJSONArray("ㄴfood");
+                                JSONArray foodArray = root.getJSONArray("food");
                                 List<FoodItem> foodList = new ArrayList<>();
 
                                 for (int i = 0; i < foodArray.length(); i++) {
@@ -120,6 +122,7 @@ public class RecomandedList extends AppCompatActivity {
 
                                 runOnUiThread(() -> {
                                     Log.e("RECOMMAND_DEBUG", "UI 업데이트 시작");
+
                                     for (int i = 0; i < Math.min(3, foodList.size()); i++) {
                                         FoodItem item = foodList.get(i);
                                         menuNames[i].setText(item.getFood());
@@ -127,20 +130,26 @@ public class RecomandedList extends AppCompatActivity {
                                         Glide.with(RecomandedList.this)
                                                 .load(item.getImage_url())
                                                 .into(menuImages[i]);
+
                                         final int index = i;
-                                        btnMap[i].setOnClickListener(v->{
-                                            intent.putExtra("key", menuNames[index].getText().toString());
+                                        btnMap[i].setOnClickListener(v -> {
+                                            Intent intent = new Intent(RecomandedList.this, MapActivity.class);
+                                            intent.putExtra("key", foodList.get(index).getFood());
+                                            intent.putExtra("latitude", lat);
+                                            intent.putExtra("longitude", lng);
+                                            startActivity(intent);
                                         });
                                     }
                                 });
 
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                Log.e("RECOMMAND_DEBUG", "JSON 파싱 실패", e);
                             }
+                        } else {
+                            Log.e("RECOMMAND_DEBUG", "서버 응답 실패: " + response.code());
+                            String error = response.body() != null ? response.body().string() : "no body";
+                            Log.e("RECOMMAND_DEBUG", "응답 본문: " + error);
                         }
-                        intent.putExtra("latitude", lat);
-                        intent.putExtra("longitude", lng);
-                        startActivity(intent);
                     }
                 }
         );
