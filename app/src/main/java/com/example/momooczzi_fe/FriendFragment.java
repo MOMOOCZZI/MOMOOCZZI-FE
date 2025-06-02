@@ -14,8 +14,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.momooczzi_fe.network.ApiFriendService;
+import com.example.momooczzi_fe.network.ApiMypageService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class FriendFragment extends Fragment {
     public FriendFragment() {
@@ -30,7 +39,36 @@ public class FriendFragment extends Fragment {
         TextView nicknameText = view.findViewById(R.id.friend_title);
         TextView nicknameOneText = view.findViewById(R.id.my_nickname);
 
+        // ✅ 내 nickname 가져오기
+        ApiMypageService.getMyPage(requireContext(), new Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    String body = response.body().string();
+                    try {
+                        JSONObject json = new JSONObject(body);
+                        String nickname = json.optString("nickname", "사용자");
 
+                        requireActivity().runOnUiThread(() -> {
+                            nicknameText.setText(nickname + " 님의 친구목록");
+                            nicknameOneText.setText(nickname);
+                        });
+
+                    } catch (JSONException e) {
+                        Log.e("FriendFragment", "JSON 파싱 오류", e);
+                    }
+                } else {
+                    Log.e("FriendFragment", "❌ /me 응답 실패: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e("FriendFragment", "❌ /me 요청 실패", e);
+            }
+        });
+
+        // ✅ 친구 목록 가져오기
         ApiFriendService.getFriendList(requireContext(), new ApiFriendService.FriendListCallback() {
             @Override
             public void onSuccess(List<FriendItem> friends) {
@@ -38,11 +76,6 @@ public class FriendFragment extends Fragment {
                     container.removeAllViews();
                     LayoutInflater inflater = LayoutInflater.from(getContext());
                     int i = 1;
-
-                    if (!friends.isEmpty()) {
-                        nicknameText.setText(friends.get(0).nickname + " 님의 친구목록");
-                        nicknameOneText.setText(friends.get(0).nickname);
-                    }
 
                     for (FriendItem friend : friends) {
                         View item = inflater.inflate(R.layout.friend_list_item, container, false);
